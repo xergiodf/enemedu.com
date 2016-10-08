@@ -1,5 +1,6 @@
-<section ng-app="backoffice">
-    <div class="container" ng-controller="registroCtrl">
+<section ng-app="backoffice" ng-controller="registroCtrl">
+    <div class="loading" ng-if="dataLoading"></div>
+    <div class="container">
         <div class="center wow fadeInDown">        
             <h2>Registrate</h2>
             <p class="lead">Enem. Empresaros de la Nueva Econom&iacute;a Mundial</p>
@@ -24,8 +25,9 @@
                 <div class="col-sm-4 wow fadeInDown">
                     <div class="form-group" ng-class="{ 'has-error' : registroForm.w_usuario.$invalid && registroForm.w_usuario.$touched }">
                         <label>Nombre de Usuario *</label>
-                        <input type="text" name="w_usuario" ng-model="reg.w_usuario" class="form-control" required="required" placeholder="(Nombre de usuario)" tabindex="3">
-                        <p ng-show="registroForm.w_usuario.$invalid && registroForm.w_usuario.$touched" class="help-block">Nombre de usuario es un campo obligatorio.</p>
+                        <input type="text" name="w_usuario" ng-model="reg.w_usuario" class="form-control" required="required" placeholder="(Nombre de usuario)" tabindex="3" ng-pattern="usernamePattern" ng-trim="false">
+                        <p ng-show="registroForm.w_usuario.$error.required && registroForm.w_usuario.$touched" class="help-block">Nombre de usuario es un campo obligatorio.</p>
+                        <p ng-show="registroForm.w_usuario.$error.pattern && registroForm.w_usuario.$touched" class="help-block">Nombre de usuario debe contener letras minusculas. Por lo menos 6.</p>
                     </div>
                     <div class="form-group" ng-class="{ 'has-error' : registroForm.w_email.$invalid && registroForm.w_email.$touched }">
                         <label>Email *</label>

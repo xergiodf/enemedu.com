@@ -101,7 +101,10 @@ angular.module('backoffice', [])
         .controller('registroCtrl',
                 ['$scope', '$http',
                     function ($scope, $http) {
+                        $scope.dataLoading = false;
+                        
                         $scope.datePattern = /^((\d{4})-(\d{2})-(\d{2})|(\d{2})\/(\d{2})\/(\d{4}))$/;
+                        $scope.usernamePattern = /^[a-z]{6,}$/;
                         $scope.numberPattern = /^\d+$/;
                         $scope.rucPattern = /^(?=.*[\-])(?=.*\d)[0-9\-]+$/;
                         $scope.passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -123,11 +126,9 @@ angular.module('backoffice', [])
                                         function success(response) {
                                             console.log(response);
                                             $scope.ciudadesList = response.data.data;
-                                            $scope.dataLoading = false;
                                         },
                                         function error(response) {
                                             console.log(response);
-                                            $scope.dataLoading = false;
                                         }
                                 );
 
