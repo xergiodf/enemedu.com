@@ -379,7 +379,8 @@ input.search-form:hover {
 }
 
 #main-slider .carousel .carousel-content {
-    margin-top: 150px;
+    margin-top: 250px;
+    text-align: center;
 }
 
 #main-slider .carousel .slide-margin{
@@ -2535,7 +2536,8 @@ shortcodes page css
 input[type="text"], 
 input[type="password"],
 input[type="email"],
-input[type="number"], 
+input[type="number"],
+select,
 textarea, 
 textarea.form-control {
     margin: 0;
@@ -2564,6 +2566,7 @@ input[type="text"]:focus,
 input[type="password"]:focus,
 input[type="email"]:focus,
 input[type="number"]:focus, 
+select:focus,
 textarea:focus, 
 textarea.form-control:focus {
     outline: 0;
@@ -2576,6 +2579,7 @@ input[type="text"]:-moz-placeholder,
 input[type="password"]:-moz-placeholder,
 input[type="email"]:-moz-placeholder,
 input[type="number"]:-moz-placeholder, 
+select:-moz-placeholder,
 textarea:-moz-placeholder, 
 textarea.form-control:-moz-placeholder { 
     color: #888; 
@@ -2585,6 +2589,7 @@ input[type="text"]:-ms-input-placeholder,
 input[type="password"]:-ms-input-placeholder,
 input[type="email"]:-ms-input-placeholder,
 input[type="number"]:-ms-input-placeholder, 
+select:-ms-input-placeholder, 
 textarea:-ms-input-placeholder, 
 textarea.form-control:-ms-input-placeholder { 
     color: #888; 
@@ -2594,13 +2599,14 @@ input[type="text"]::-webkit-input-placeholder,
 input[type="password"]::-webkit-input-placeholder,
 input[type="email"]::-webkit-input-placeholder,
 input[type="number"]::-webkit-input-placeholder, 
+select::-webkit-input-placeholder, 
 textarea::-webkit-input-placeholder, 
 textarea.form-control::-webkit-input-placeholder { 
     color: #888; 
 }
 
-input .form-control .focused {
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 100, 255, 0.5);
+.focused {
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(215, 44, 44, 0.5) !important;
 }
 
 /***** Top content *****/

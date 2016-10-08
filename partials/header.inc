@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" ng-app="enemedu">
+<html lang="es">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +14,7 @@
         <link href="resources/css/prettyPhoto.css" rel="stylesheet">
         <link href="resources/css/main.css" rel="stylesheet">
         <link href="resources/css/responsive.css" rel="stylesheet">
+        <link href="resources/css/datepicker.css" rel="stylesheet">
         <!--[if lt IE 9]>
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
@@ -28,13 +29,14 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-6 col-xs-4">
-                            <div class="top-number"><p><i class="fa fa-phone-square"></i>  +595 971 660545</p></div>
+                            <div class="top-number"><p><i class="fa fa-phone-square"></i>  (0972) 197 397</p></div>
+                            <div class="top-number"><p><i class="fa fa-phone-square"></i>  (0991) 952 569</p></div>                 
                         </div>
                         <div class="col-sm-6 col-xs-8">
                             <div class="social">
                                 <ul class="social-share">
                                     <li><a href="https://web.facebook.com/enemedu/"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="mailto:someone@example.com"><i class="fa fa-envelope"></i></a></li>
+                                    <li><a href="contacto.php"><i class="fa fa-envelope"></i></a></li>
                                     <li><a href="#"><i class="fa fa-linkedin"></i></a></li> 
                                     <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
                                     <li><a href="#"><i class="fa fa-skype"></i></a></li>
@@ -60,7 +62,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.html"><img src="resources/images/logo-web.png" alt="logo"></a>
+                        <a class="navbar-brand" href="index.php"><img src="resources/images/logo-web.png" alt="logo"></a>
                     </div>
 
                     <div class="collapse navbar-collapse navbar-right">
@@ -93,7 +95,8 @@
                                     <li><a href="business.php">Conoc&eacute; ENEM giftCard</a></li>
                                 </ul>
                             </li>
-                            <li><a href="contacto.php">Contacto</a></li>                        
+                            <li><a href="contacto.php">Contacto</a></li>
+                            <li><a href="admin.php">Administraci&oacute;n</a></li>
                         </ul>
                     </div>
                 </div><!--/.container-->

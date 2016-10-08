@@ -59,7 +59,7 @@
                 <div class="testimonial">
                     <div class="media testimonial-inner wow fadeInDownBig">
                         <div class="pull-left">
-                            <img class="img-responsive img-circle" src="resources/images/testimonials1.png">
+                            <img class="img-responsive img-circle" src="resources/images/isotipo.png">
                         </div>
                         <div class="media-body">
                             <p><strong>ENEM Edu</strong> nace con el fin de poder brindar a todas las personas un modelo educativo integral, enfocado en el desarrollo del ser, que potencializa las capacidades de una persona y lo ayuda a descubrir su propósito.</p>
@@ -68,7 +68,7 @@
 
                     <div class="media testimonial-inner wow fadeInDownBig">
                         <div class="pull-left">
-                            <img class="img-responsive img-circle" src="resources/images/testimonials1.png">
+                            <img class="img-responsive img-circle" src="resources/images/isotipo.png">
                         </div>
                         <div class="media-body">
                             <p>Un lugar donde puedas aprender tanto sobre la felicidad, el valor real de la vida, la amistad y el amor, como así también puedes aprender sobre el dinero y los negocios, a ser un líder, a comunicarte efectivamente con los demás, dotarte de  las mejores herramientas para vender y conseguir una negociación efectiva, a afrontar los miedos y canalizarlos para lograr el éxito y además aprenderás sobre Inteligencia emocional, coach en finanzas, y mucho más.</p>
@@ -77,7 +77,7 @@
                     
                     <div class="media testimonial-inner wow fadeInDownBig">
                         <div class="pull-left">
-                            <img class="img-responsive img-circle" src="resources/images/testimonials1.png">
+                            <img class="img-responsive img-circle" src="resources/images/isotipo.png">
                         </div>
                         <div class="media-body">
                             <p><strong>Sin lugar a dudas te damos la bienvenida a la mejor plataforma educativa para desarrollar el SER.</strong></p>

@@ -1,5 +1,5 @@
-<section>
-    <div class="container top-content">
+<section ng-app="backoffice">
+    <div class="container top-content" ng-controller="loginCtrl">
         <div class="center wow fadeInDown">
             <h2>Bienvenido</h2>
             <p class="lead">Ingresa al backoffice de Enem, o registrate para formar parte de &eacute;ste proyecto.</p>
@@ -17,16 +17,16 @@
                         </div>
                     </div>
                     <div class="form-bottom">
-                        <form role="form" action="" method="post" class="login-form">
+                        <form role="form" class="login-form" ng-submit="login()">
                             <div class="form-group">
                                 <label class="sr-only" for="form-username">Usuario</label>
-                                <input type="text" name="form-username" placeholder="Usuario..." class="form-username form-control" id="form-username">
+                                <input type="text" name="w_username" placeholder="Usuario..." class="form-username form-control" id="form-username">
                             </div>
                             <div class="form-group">
                                 <label class="sr-only" for="form-password">Contrase&nt&ntilde;a</label>
-                                <input type="password" name="form-password" placeholder="Contrase&ntilde;a..." class="form-password form-control" id="form-password">
+                                <input type="password" name="w_password" placeholder="Contrase&ntilde;a..." class="form-password form-control" id="form-password">
                             </div>
-                            <button type="submit" class="btn btn-primary">Ingresar</button>
+                            <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid || dataLoading">Ingresar</button>
                         </form>
                     </div>
                 </div>
