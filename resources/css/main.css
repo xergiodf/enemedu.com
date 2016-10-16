@@ -1,12 +1,15 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,600,700,300,800);
 
+html, body, #container { height: 100%; }
+body > #container { height: auto; min-height: 100%; }
+#content { padding-bottom: 82px; }
 
 /*************************
 *******Typography******
 **************************/
 
 body {
-    background: #fff url;
+    background: #fff;
     font-family: 'Open Sans', sans-serif;
     color:#4e4e4e;
     line-height: 22px;
@@ -34,7 +37,7 @@ h2{
 
 h3{
     font-size: 16px;
-    color: #787878;
+    color: #FFF;
     font-weight: 400;
     line-height: 24px;
 }
@@ -114,8 +117,16 @@ a:focus {
     margin-left: 20px;
 }
 
-body > section {
-    padding: 70px 0;
+body section {
+    padding: 70px 0 100px 0;
+}
+
+body section.admin {
+    padding-top: 10px;
+}
+
+body section.admin .admin-wrap {
+    padding-top: 30px;
 }
 
 .center {
@@ -661,19 +672,21 @@ input.search-form:hover {
 #services {
     background: #000 url(../images/services/bg_services.png);
     background-size: cover;
+    color: #FFF;
 }
 
 #services .lead,
-#services h2{
+#services h2 {
     color: #fff;
 }
 
 .services-wrap {
     padding: 40px 30px;
-    background: #fff;
-    border-radius: 4px;
+    background: rgba(0,0,0,0.8);
+    border-radius: 10px;
     margin: 0 0 40px;
     min-height: 180px;
+    color: #FFF;
 }
 
 .services-wrap h3 {
@@ -927,7 +940,7 @@ a.accordion-toggle  i{
 }
 
 .testimonial-inner {
-    color:#000;
+    color:#FFF;
     font-size: 14px;
 }
 
@@ -1172,10 +1185,12 @@ a.accordion-toggle  i{
 .team h4 {
     margin-top: 0;
     text-transform: uppercase;
+    color: #FFF;
 }
 
 .team h5 {
     font-weight: 300;
+    color: #FFF;
 }
 
 .single-profile-top, 
@@ -1186,9 +1201,12 @@ a.accordion-toggle  i{
 
 .single-profile-top, 
 .single-profile-bottom  {
+    background: rgba(0, 0, 0, 0.8);
     border: 1px solid #ddd;
     padding: 15px;
     position: relative;
+    color: #fff;
+    border-radius: 10px;
 }
 
 .media_image {
@@ -1898,6 +1916,7 @@ ul.social_icons li  a i{
     background-repeat: no-repeat;
     background-size: cover;
     padding: 70px 0;
+    color:#4e4e4e;
 }
 
 .gmap-area .gmap iframe {
@@ -2125,6 +2144,10 @@ ul.faq li > div h3 {
     margin-bottom: 0px;
 }
 
+.img-responsive {
+    border-radius: 10px;
+}
+
 .blog .blog-item .blog-content {
     padding-bottom: 25px;
 }
@@ -2156,7 +2179,7 @@ ul.faq li > div h3 {
     overflow: hidden;
 }
 
-.blog .blog-item .entry-meta > span {
+.blog .blog-item .entry-meta > a span {
     background: #f5f5f5;
     border-top: 1px solid #fff;
     display: block;
@@ -2166,23 +2189,29 @@ ul.faq li > div h3 {
     text-align: left;
 }
 
+.blog .blog-item .entry-meta > a span:hover {
+    background: #C6C6C6;
+}
+
 #publish_date {
     background: #FF5200;
-    border-bottom: 5px solid #4e4e4e;
+    border-bottom: 1px solid #f5f5f5;
+    display: block;
     color: #fff;
     padding: 5px 0;
+    overflow: hidden;
     text-align: center;
 }
 
-.blog .blog-item .entry-meta > span {
-    color: #ccc;
+.blog .blog-item .entry-meta > a span {
+    color: #888;
 }
 
-.blog .blog-item .entry-meta > span a {
-    font-size: 12px;
+.blog .blog-item .entry-meta > a span {
+    font-size: 13px;
     margin-left: 3px;
     font-weight: 300;
-    color: #888;
+    color: #111;
 }
 
 ul.pagination > li > a {
@@ -2393,7 +2422,7 @@ ul.sidebar-gallery {
     padding-bottom: 30px;
 }
 
-.post_reply_comments a {
+.post_reply_comments a, .post_reply_comments a {
     bottom: 15px;
     position: absolute;
     right: 30px;
@@ -2401,6 +2430,7 @@ ul.sidebar-gallery {
     color: #fff;
     border-radius: 5px;
     padding: 8px 20px;
+    cursor: pointer;
 }
 
 .post_reply_comments a:before {
@@ -2508,25 +2538,15 @@ shortcodes page css
     padding-bottom: 30px;
     color: #fff;
     background: #2e2e2e;
+    clear: both;
+    position: relative;
+    z-index: 10;
+    height: 82px;
+    margin-top: -82px;
 }
 
 #footer a {
     color: #fff;
-}
-
-#footer a:hover {
-    color: #FF5200;
-}
-
-#footer ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-#footer ul > li {
-    display: inline-block;
-    margin-left: 15px;
 }
 
 /**
@@ -2610,6 +2630,9 @@ textarea.form-control::-webkit-input-placeholder {
 }
 
 /***** Top content *****/
+.form-box, .form-box h3 {
+    color:#4e4e4e;
+}
 
 .form-top {
     overflow: hidden;
@@ -2703,7 +2726,7 @@ textarea.form-control::-webkit-input-placeholder {
 
 .loading:not(:required) {
     /* hide "loading..." text */
-    
+
     font: 0/0 a;
     color: transparent;
     text-shadow: none;
@@ -2792,3 +2815,20 @@ textarea.form-control::-webkit-input-placeholder {
         transform: rotate(360deg);
     }
 }
+
+/**
+ * Network
+ */
+.node circle {
+   fill: #fff;
+   stroke: steelblue;
+   stroke-width: 3px;
+ }
+
+ .node text { font: 12px sans-serif; }
+
+ .link {
+   fill: none;
+   stroke: #ccc;
+   stroke-width: 2px;
+ }

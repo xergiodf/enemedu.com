@@ -1,0 +1,32 @@
+<div class="loading" ng-show="dataLoading"></div>
+<div class="wow fadeInDown">
+    <h2>Usuarios</h2>
+</div>
+<div class="blog">
+    <div class="row admin-wrap">
+        <div class="col-md-8">
+            <div class="alert alert-{{msgClass}} text-center" role="alert" ng-show="msg">{{msg | uppercase}}</div>
+            <div class="widget search">
+                <form role="form">
+                    <input type="text" class="form-control search_box" autocomplete="off" placeholder="Buscar usuarios" ng-model="searchText">
+                </form>
+            </div><!--/.search-->
+            <div class="media comment_section" ng-repeat="usuario in usuariosList | filter:searchText">
+                <div class="pull-left post_comments">
+                    <img src="resources/images/blog/avatar3.png" class="img-circle" alt="" />
+                </div>
+                <div class="media-body post_reply_comments" >
+                    <h2>{{ usuario.nombreCompleto }}</h2>
+                    <h4><strong>{{ usuario.usuario }}</stron></h4>
+                    <h4>Fecha de registro: {{ usuario.fechaRegistro }}</h4>
+                    <span ng-switch on="usuario.activo" ng-click="changeUser(usuario.idUsuario)">
+                        <a>
+                            <span ng-switch-when="true">Inactivar</span>
+                            <span ng-switch-when="false">Activar</span>
+                        </a>
+                    </span>
+                </div>
+            </div> 
+        </div>
+    </div><!--/.row-->
+</div>

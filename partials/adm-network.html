@@ -1,0 +1,23 @@
+<div class="loading" ng-show="dataLoading"></div>
+<div class="wow fadeInDown">
+    <h2>Network</h2>
+</div>
+<div class="blog">
+    <div class="row admin-wrap">
+        <div class="col-md-12">
+            <div class="alert alert-{{msgClass}} text-center" role="alert" ng-show="msg">{{msg | uppercase}}</div>
+            <div class="blog-item">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3 text-center">
+                        <div class="entry-meta">
+                            <span id="publish_date"><strong>Direcci&oacute;n Actual: {{ direccion }}</strong></span>
+                            <a ng-click="cambiarDireccion()" style="cursor: pointer;"><span><i class="fa fa-arrows"> </i> Cambiar direccion</span></a>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-9 blog-content" id="treeCanvas"></div>
+                </div>    
+            </div><!--/.blog-item-->
+        </div><!--/.col-md-8-->
+    </div><!--/.row-->
+</div>

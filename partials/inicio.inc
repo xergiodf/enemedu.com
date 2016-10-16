@@ -7,7 +7,7 @@
         </ol>
         <div class="carousel-inner">
 
-            <div class="item active" style="background-image: url(resources/images/slider/bg1.jpg)">
+            <div class="item active" style="background-image: url(resources/images/enem/business.jpg)">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
@@ -21,14 +21,14 @@
                 </div>
             </div><!--/.item-->
 
-            <div class="item" style="background-image: url(resources/images/slider/bg2.jpg)">
+            <div class="item" style="background-image: url(resources/images/enem/edu.jpg)">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="carousel-content">
                                 <h1 class="animation animated-item-1">ENEM</h1>
-                                <h2 class="animation animated-item-2">Educaci&oacute;n de la Nueva Econom&iacute;a Mundial</h2>
-                                <a class="btn-slide animation animated-item-3" href="edu.php">Read More</a>
+                                <h2 class="animation animated-item-2">Educaci&oacute;n para la Nueva Econom&iacute;a</h2>
+                                <a class="btn-slide animation animated-item-3" href="edu.php">Enem Edu  </a>
                             </div>
                         </div>
                     </div>

@@ -6,5 +6,5 @@
     } else if ( isset($_GET['registro']) ) {
         $include = "registro";
     }
-    include("partials/$include.inc"); ?>
+    include("partials/includes/$include.inc"); ?>
 <?php include("partials/footer.inc"); ?>
