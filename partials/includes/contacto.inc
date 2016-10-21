@@ -15,13 +15,13 @@
         $message .= "<tr><td><strong>Asunto:</strong> </td><td>" . strip_tags($_POST['subject']) . "</td></tr>";
         $message .= "<tr><td><strong>Empresa:</strong> </td><td>" . strip_tags($_POST['empresa'])  . "</td></tr>";
         $message .= "<tr><td><strong>Mensaje:</strong> </td><td>" . strip_tags($_POST['message'])  . "</td></tr>";
-        $message .= "<tr><td><strong>Enviado:</strong> </td><td>" . date('d/m/Y HH:MM:SS', time()) . "</td></tr>";
+        $message .= "<tr><td><strong>Enviado:</strong> </td><td>" . date('d/m/Y H:i:s', time()) . "</td></tr>";
         $message .= "</table>";
         $message .= "</body></html>";
 
         $email_from = trim(stripslashes($_POST['email']));
         $subject = strip_tags($_POST['subject']);
-        $email_to = 'contacto@minicubic.com';
+        $email_to = 'info@enemedu.com';
 
         $body = $message;
 
@@ -40,51 +40,38 @@
     <div class="gmap-area">
         <div class="container">
             <div class="row">
-                <div class="col-sm-5 text-center">
+                <div class="col-sm-4 text-center">
                     <div class="gmap">
-                        <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=JoomShaper,+Dhaka,+Dhaka+Division,+Bangladesh&amp;aq=0&amp;oq=joomshaper&amp;sll=37.0625,-95.677068&amp;sspn=42.766543,80.332031&amp;ie=UTF8&amp;hq=JoomShaper,&amp;hnear=Dhaka,+Dhaka+Division,+Bangladesh&amp;ll=23.73854,90.385504&amp;spn=0.001515,0.002452&amp;t=m&amp;z=14&amp;iwloc=A&amp;cid=1073661719450182870&amp;output=embed"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3605.6696578917167!2d-57.506244884987474!3d-25.348863783825895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDIwJzU1LjkiUyA1N8KwMzAnMTQuNiJX!5e0!3m2!1ses!2s!4v1476716642646" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
                     </div>
                 </div>
 
-                <div class="col-sm-7 map-content">
+                <div class="col-sm-4 map-content">
                     <ul class="row">
-                        <li class="col-sm-6">
+                        <li class="col-sm-12">
                             <address>
-                                <h5>Head Office</h5>
-                                <p>1537 Flint Street <br>
-                                    Tumon, MP 96911</p>
-                                <p>Phone:670-898-2847 <br>
-                                    Email Address:info@domain.com</p>
+                                <h5>Enem Business</h5>
+                                <p>Doctor Gaspar Rodriguez de Francia casi Manuel Ortiz Guerrero Nº 72<br>
+                                     Barrio Maria Auxiliadora, San Lorenzo, Paraguay</p>
+                                <p>Tel&eacute;fono: 0972 197 397 <br>
+                                    Email: info@enemedu.com</p>
                             </address>
 
                             <address>
-                                <h5>Zonal Office</h5>
-                                <p>1537 Flint Street <br>
-                                    Tumon, MP 96911</p>                                
-                                <p>Phone:670-898-2847 <br>
-                                    Email Address:info@domain.com</p>
-                            </address>
-                        </li>
-
-
-                        <li class="col-sm-6">
-                            <address>
-                                <h5>Zone#2 Office</h5>
-                                <p>1537 Flint Street <br>
-                                    Tumon, MP 96911</p>
-                                <p>Phone:670-898-2847 <br>
-                                    Email Address:info@domain.com</p>
-                            </address>
-
-                            <address>
-                                <h5>Zone#3 Office</h5>
-                                <p>1537 Flint Street <br>
-                                    Tumon, MP 96911</p>
-                                <p>Phone:670-898-2847 <br>
-                                    Email Address:info@domain.com</p>
+                                <h5>Enem Edu</h5>
+                                <p>36 proyectada y avenida japon Nº 1878 <br>
+                                    Barrio Republicano, Asunción, Paraguay</p>                                
+                                <p>Tel&eacute;fono: 0984 563 212 <br>
+                                    Email: info@enemedu.com</p>
                             </address>
                         </li>
                     </ul>
+                </div>
+                
+                <div class="col-sm-4 text-center">
+                    <div class="gmap">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3606.496618624174!2d-57.64319038498793!3d-25.321111283838682!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDE5JzE2LjAiUyA1N8KwMzgnMjcuNiJX!5e0!3m2!1ses!2s!4v1476717694613" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
                 </div>
             </div>
         </div>

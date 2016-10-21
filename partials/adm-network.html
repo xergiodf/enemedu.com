@@ -5,13 +5,18 @@
 <div class="blog">
     <div class="row admin-wrap">
         <div class="col-md-12">
-            <div class="alert alert-{{msgClass}} text-center" role="alert" ng-show="msg">{{msg | uppercase}}</div>
+            <div class="alert alert-{{msgClass}} text-center" role="alert" ng-show="msg">{{msg| uppercase}}</div>
             <div class="blog-item">
                 <div class="row">
                     <div class="col-xs-12 col-sm-3 text-center">
                         <div class="entry-meta">
-                            <span id="publish_date"><strong>Direcci&oacute;n Actual: {{ direccion }}</strong></span>
+                            <span id="publish_date"><strong>Direcci&oacute;n Actual: {{ direccion}}</strong></span>
                             <a ng-click="cambiarDireccion()" style="cursor: pointer;"><span><i class="fa fa-arrows"> </i> Cambiar direccion</span></a>
+                        </div>
+                        <br/><br/>
+                        <div class="entry-meta">
+                            <span id="publish_date"><strong>Usuario: {{ loggedUser.usuario }}</strong></span>
+                            <a><span><i class="fa fa-user"> </i> Sponsor: {{ loggedUser.sponsor}}</span></a>
                         </div>
                     </div>
 

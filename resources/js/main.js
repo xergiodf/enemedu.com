@@ -6,8 +6,6 @@ jQuery(function ($) {
                     interval: 50
                 });
             });
-
-
     // accordian
     $('.accordion-toggle').on('click', function () {
         $(this).closest('.panel-group').children().each(function () {
@@ -29,6 +27,18 @@ jQuery(function ($) {
     });
 
     $('#w_fecnac').datepicker();
+
+    $('.view-pdf').on('click', function () {
+        var pdf_link = $(this).attr('href');
+        var iframe = '<object type="application/pdf" data="' + pdf_link + '" width="100%" height="500">No Support</object>'
+        $.createModal({
+            title: 'Bases y condiciones Enem GiftCard',
+            message: iframe,
+            closeButton: false,
+            scrollable: false
+        });
+        return false;
+    });
 
     if (window.location.pathname === '/business.php' &&
             window.location.search.startsWith('?login&tokenCambioPass=')) {
@@ -75,14 +85,24 @@ angular.module('enem', [
                             data: {
                                 authRequired: true
                             }
+                        })
+                        .state("pagos", {
+                            url: "/pagos",
+                            templateUrl: "partials/adm-pagos.html",
+                            controller: "pagosCtrl",
+                            data: {
+                                authRequired: true
+                            }
                         });
             }])
         .run(['$rootScope', '$transitions', '$state', '$cookies', '$http', 'AuthService',
             function ($rootScope, $transitions, $state, $cookies, $http, AuthService) {
 
                 // keep user logged in after page refresh
-                $rootScope.loggedUser = $cookies.getObject('loggedUser') || {};
-                $http.defaults.headers.common['Authorization'] = 'Bearer ' + $rootScope.loggedUser.token;
+                if ($cookies.getObject('loggedUser') !== undefined) {
+                    $rootScope.loggedUser = $cookies.getObject('loggedUser') || {};
+                    $http.defaults.headers.common['Authorization'] = 'Bearer ' + $rootScope.loggedUser.token;
+                }
 
                 $transitions.onBefore({
                     to: function (state) {
@@ -326,7 +346,7 @@ angular.module('enem', [
                                     );
                         };
 
-                        service.cambiarEstadoUsuario = function (callback) {
+                        service.cambiarEstadoUsuario = function (userId, callback) {
                             $http.get(backend + '/usuariosrest/cambiarEstadoUsuario/' + userId)
                                     .then(
                                             function success(response) {
@@ -337,8 +357,8 @@ angular.module('enem', [
                                             }
                                     );
                         };
-                        
-                        service.cambiarDireccionUsuario = function(callback) {
+
+                        service.cambiarDireccionUsuario = function (callback) {
                             $http.get(backend + '/usuariosrest/cambiarDireccionRed')
                                     .then(
                                             function success(response) {
@@ -348,11 +368,28 @@ angular.module('enem', [
                                                 callback(response);
                                             }
                                     );
-                        }
+                        };
+
+                        service.obtenerRedUsuario = function (callback) {
+                            $http.get(backend + "/usuariosrest/visualizarRed")
+                                    .then(
+                                            function success(response) {
+                                                callback(response);
+                                            },
+                                            function error(response) {
+                                                callback(response);
+                                            }
+                                    );
+                        };
 
                         return service;
                     }])
         .controller('inicioCtrl', ['$scope',
+            function ($scope) {
+
+
+            }])
+        .controller('pagosCtrl', ['$scope',
             function ($scope) {
 
 
@@ -391,7 +428,7 @@ angular.module('enem', [
                         $scope.dataLoading = false;
 
                         $scope.datePattern = /^((\d{4})-(\d{2})-(\d{2})|(\d{2})\/(\d{2})\/(\d{4}))$/;
-                        $scope.usernamePattern = /^[a-z]{6,}$/;
+                        $scope.usernamePattern = /^[a-z0-9]{6,}$/;
                         $scope.numberPattern = /^\d+$/;
                         $scope.rucPattern = /^(?=.*[\-])(?=.*\d)[0-9\-]+$/;
                         $scope.passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -451,7 +488,6 @@ angular.module('enem', [
                         };
                     }]
                 )
-
         .controller('loginCtrl',
                 ['$scope', '$rootScope', 'AuthService',
                     function ($scope, $rootScope, AuthService) {
@@ -575,10 +611,10 @@ angular.module('enem', [
         .controller('networkCtrl',
                 ['$rootScope', '$scope', 'UsuarioService',
                     function ($rootScope, $scope, UsuarioService) {
-                        
+
                         $scope.direccion = $rootScope.loggedUser.direccion;
-                        
-                        $scope.cambiarDireccion = function() {
+
+                        $scope.cambiarDireccion = function () {
                             $scope.dataLoading = true;
                             UsuarioService.cambiarDireccionUsuario(function (response) {
                                 $scope.dataLoading = false;
@@ -598,110 +634,110 @@ angular.module('enem', [
                                 }
                             });
                         };
-                        
-                        var treeData = [
-                            {
-                                "name": $rootScope.loggedUser.nombreCompleto,
-                                "parent": "null",
-                                "children": [
-                                    {
-                                        "name": "Level 2: A",
-                                        "parent": "Top Level",
-                                        "children": [
-                                            {
-                                                "name": "Son of A",
-                                                "parent": "Level 2: A"
-                                            },
-                                            {
-                                                "name": "Daughter of A",
-                                                "parent": "Level 2: A"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "Level 2: B",
-                                        "parent": "Top Level"
-                                    }
-                                ]
+
+                        var treeData;
+                        $scope.dataLoading = true;
+                        UsuarioService.obtenerRedUsuario(function (response) {
+                            $scope.dataLoading = false;
+                            if (response.status !== 200) {
+                                console.log(response);
+                                $scope.error = "Ocurrió un error en la comunicaciónn con el servidor.";
+                            } else {
+                                treeData = response.data;
+
+                                // ************** Generate the tree diagram  *****************
+                                var margin = {top: 20, right: 150, bottom: 20, left: 150, node: 150};
+                                var width = countChildren(treeData[0]) * (margin.node / 1.7);
+                                var height = countChildren(treeData[0]) * (margin.node / 4);
+                                var viewbox = "0,0," + (width + margin.right + margin.left) + "," + (height + margin.top + margin.bottom);
+
+                                var i = 0;
+
+                                var tree = d3.layout.tree()
+                                        .size([height, width]);
+
+                                var diagonal = d3.svg.diagonal()
+                                        .projection(function (d) {
+                                            return [d.y, d.x];
+                                        });
+
+                                var svg = d3.select("#treeCanvas").append("svg")
+                                        .attr("viewBox", viewbox)
+                                        .attr("width", width + margin.right + margin.left)
+                                        .attr("height", height + margin.top + margin.bottom)
+                                        .append("g")
+                                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                                root = treeData[0];
+
+                                update(root);
+
+                                function update(source) {
+
+                                    // Compute the new tree layout.
+                                    var nodes = tree.nodes(root).reverse(),
+                                            links = tree.links(nodes);
+
+                                    // Normalize for fixed-depth.
+                                    nodes.forEach(function (d) {
+                                        d.y = d.depth * margin.node;
+                                    });
+
+                                    // Declare the nodesâ€¦
+                                    var node = svg.selectAll("g.node")
+                                            .data(nodes, function (d) {
+                                                return d.id || (d.id = ++i);
+                                            });
+
+                                    // Enter the nodes.
+                                    var nodeEnter = node.enter().append("g")
+                                            .attr("class", "node")
+                                            .attr("transform", function (d) {
+                                                return "translate(" + d.y + "," + d.x + ")";
+                                            });
+
+                                    nodeEnter.append("circle")
+                                            .attr("r", 10)
+                                            .style("fill", "#fff");
+
+                                    nodeEnter.append("text")
+                                            .attr("x", function (d) {
+                                                return d.children || d._children ? -13 : 13;
+                                            })
+                                            .attr("dy", ".35em")
+                                            .attr("text-anchor", function (d) {
+                                                return d.children || d._children ? "end" : "start";
+                                            })
+                                            .text(function (d) {
+                                                return d.name;
+                                            })
+                                            .style("fill-opacity", 1);
+
+                                    // Declare the linksâ€¦
+                                    var link = svg.selectAll("path.link")
+                                            .data(links, function (d) {
+                                                return d.target.id;
+                                            });
+
+                                    // Enter the links.
+                                    link.enter().insert("path", "g")
+                                            .attr("class", "link")
+                                            .attr("d", diagonal);
+                                }
+
+                                function countChildren(n) {
+
+                                    if (n.children === undefined)
+                                        return 1;
+
+                                    var score = 0;
+                                    n.children.forEach(function (c) {
+                                        var r = countChildren(c);
+                                        score += r;
+                                    });
+                                    return score;
+                                }
                             }
-                        ];
-                        // ************** Generate the tree diagram  *****************
-                        var margin = {top: 20, right: 120, bottom: 20, left: 120},
-                        width = 960 - margin.right - margin.left,
-                                height = 500 - margin.top - margin.bottom;
-
-                        var i = 0;
-
-                        var tree = d3.layout.tree()
-                                .size([height, width]);
-
-                        var diagonal = d3.svg.diagonal()
-                                .projection(function (d) {
-                                    return [d.y, d.x];
-                                });
-
-                        var svg = d3.select("#treeCanvas").append("svg")
-                                .attr("width", width + margin.right + margin.left)
-                                .attr("height", height + margin.top + margin.bottom)
-                                .append("g")
-                                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-                        root = treeData[0];
-
-                        update(root);
-
-                        function update(source) {
-
-                            // Compute the new tree layout.
-                            var nodes = tree.nodes(root).reverse(),
-                                    links = tree.links(nodes);
-
-                            // Normalize for fixed-depth.
-                            nodes.forEach(function (d) {
-                                d.y = d.depth * 180;
-                            });
-
-                            // Declare the nodesâ€¦
-                            var node = svg.selectAll("g.node")
-                                    .data(nodes, function (d) {
-                                        return d.id || (d.id = ++i);
-                                    });
-
-                            // Enter the nodes.
-                            var nodeEnter = node.enter().append("g")
-                                    .attr("class", "node")
-                                    .attr("transform", function (d) {
-                                        return "translate(" + d.y + "," + d.x + ")";
-                                    });
-
-                            nodeEnter.append("circle")
-                                    .attr("r", 10)
-                                    .style("fill", "#fff");
-
-                            nodeEnter.append("text")
-                                    .attr("x", function (d) {
-                                        return d.children || d._children ? -13 : 13;
-                                    })
-                                    .attr("dy", ".35em")
-                                    .attr("text-anchor", function (d) {
-                                        return d.children || d._children ? "end" : "start";
-                                    })
-                                    .text(function (d) {
-                                        return d.name;
-                                    })
-                                    .style("fill-opacity", 1);
-
-                            // Declare the linksâ€¦
-                            var link = svg.selectAll("path.link")
-                                    .data(links, function (d) {
-                                        return d.target.id;
-                                    });
-
-                            // Enter the links.
-                            link.enter().insert("path", "g")
-                                    .attr("class", "link")
-                                    .attr("d", diagonal);
-
-                        }
+                        });
                     }]
                 );

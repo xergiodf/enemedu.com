@@ -72,6 +72,7 @@
                                         <a href="admin.php" class="dropdown-toggle" data-toggle="dropdown" ng-show="loggedUser">Back Office</a>
                                         <ul class="dropdown-menu">
                                             <li><a href="admin.php#/inicio">Inicio</a></li>
+                                            <li><a href="admin.php#/pagos">Formas de Pago</a></li>
                                             <li><a href="admin.php#/network">Network</a></li>
                                             <li><a href="admin.php#/password">Cambio de Contrase&ntilde;a</a></li>
                                             <li ng-show="loggedUser.admin"><a href="admin.php#/usuarios">Activar Usuarios Nuevos</a></li>

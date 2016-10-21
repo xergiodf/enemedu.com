@@ -20,9 +20,11 @@
                     <h4><strong>{{ usuario.usuario }}</stron></h4>
                     <h4>Fecha de registro: {{ usuario.fechaRegistro }}</h4>
                     <span ng-switch on="usuario.activo" ng-click="changeUser(usuario.idUsuario)">
-                        <a>
-                            <span ng-switch-when="true">Inactivar</span>
-                            <span ng-switch-when="false">Activar</span>
+                        <a ng-switch-when="true" class="inactivo">
+                            <span>Inactivar</span>
+                        </a>
+                        <a ng-switch-when="false" class="activo">
+                            <span>Activar</span>
                         </a>
                     </span>
                 </div>

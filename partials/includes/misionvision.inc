@@ -28,7 +28,7 @@
                         <h3>Visión</h3>
                         <p>Ser la mayor plataforma educativa y de oportunidad de negocios, que sea capaz de crear una mentalidad de éxito en las personas, donde la riqueza que abarca en la parte personal, familiar, social y económica, sean las bases fundamentales de logros y metas.</p>
                         <p>Implementar una nueva cultura social en las personas de cualquier edad que estén dispuestas al cambio donde puedan mantener una correcta educación, que sea flexible y adaptable para lograr ser felices y prósperos.</p>
-                        <p>Una plataforma donde todas las personas puedan recibir conocimientos de economía y desarrollo personal, donde aprendan  a analizar las oportunidades que trae consigo esta nueva etapa económica y aquellas oportunidades  que van naciendo día a día y por sobre poder bridarles una plataforma de negocios donde puedan aplicar todos sus conocimientos adquiridos y comenzar a trabajar para cumplir sus sueños y lograr obtener libertad de tiempo y dinero.</p>
+                        <p>Una plataforma donde todas las personas puedan recibir conocimientos de economía y desarrollo personal, donde aprendan  a analizar las oportunidades que trae consigo esta nueva etapa económica y aquellas oportunidades  que van naciendo día a día y por sobre todo poder bridarles una plataforma de negocios donde puedan aplicar todos sus conocimientos adquiridos y comenzar a trabajar para cumplir sus sueños y lograr obtener libertad de tiempo y dinero.</p>
                     </div>
                 </div>
             </div>                               

@@ -36,7 +36,9 @@
 <script src="resources/js/bootstrap.min.js"></script>
 <script src="resources/js/bootstrap-datepicker.js"></script>
 <script src="resources/js/d3.v3.min.js"></script>
-<script src="resources/js/main.js?<?php echo(rand()); ?> "></script>
+<!--script src="resources/js/enem.min.js?<?php echo(rand()); ?> "></script-->
+<script src="resources/js/main.js"></script>
+<script src="resources/js/easymodal.min.js"></script>
 <script src="resources/js/wow.min.js"></script>
 </body>
 </html>

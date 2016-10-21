@@ -14,11 +14,11 @@
                 </ol>
 
                 <div class="carousel-inner">
-                    <div class="item active">
-                        <img src="resources/images/enem/logo-enem-colores-letras-negras.png" class="img-responsive" alt=""> 
+                    <div class="item active" style="height: 653px;">
+                        <img src="resources/images/enem/logo-enem-colores-letras-negras.png" class="img-responsive" alt="" > 
                     </div>
                     <div class="item">
-                        <img src="resources/images/slider_one.jpg" class="img-responsive" alt=""> 
+                        <img src="resources/images/enem/05.jpg" class="img-responsive" alt=""> 
                     </div> 
                 </div>
 

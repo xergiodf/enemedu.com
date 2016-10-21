@@ -2422,7 +2422,7 @@ ul.sidebar-gallery {
     padding-bottom: 30px;
 }
 
-.post_reply_comments a, .post_reply_comments a {
+.post_reply_comments a {
     bottom: 15px;
     position: absolute;
     right: 30px;
@@ -2431,6 +2431,14 @@ ul.sidebar-gallery {
     border-radius: 5px;
     padding: 8px 20px;
     cursor: pointer;
+}
+
+.post_reply_comments a.activo {
+    background: #0C7F00;
+}
+
+.post_reply_comments a.inactivo {
+    background: #BE0016;
 }
 
 .post_reply_comments a:before {
@@ -2443,6 +2451,14 @@ ul.sidebar-gallery {
     left: -12px;
     position: absolute;
     z-index: 99999;
+}
+
+.post_reply_comments a.activo:before {
+    border-color: #0C7F00 transparent transparent;
+}
+
+.post_reply_comments a.inactivo:before {
+    border-color: #BE0016 transparent transparent;
 }
 
 .post_reply_comments h2 a{
@@ -2832,3 +2848,26 @@ textarea.form-control::-webkit-input-placeholder {
    stroke: #ccc;
    stroke-width: 2px;
  }
+ 
+ /**
+ * modal iframe
+ */
+.iframe-container {    
+    padding-bottom: 60%;
+    padding-top: 30px; height: 0; overflow: hidden;
+}
+ 
+.iframe-container iframe,
+.iframe-container object,
+.iframe-container embed{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+div#treeCanvas {
+    border: 1px solid #ccc;
+    overflow: scroll;
+}

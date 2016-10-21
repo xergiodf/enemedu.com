@@ -3,7 +3,7 @@
     <div class="container">
         <div class="center wow fadeInDown">        
             <h2>Registrate</h2>
-            <p class="lead">Enem. Empresaros de la Nueva Econom&iacute;a Mundial</p>
+            <p class="lead">Enem. Empresarios de la Nueva Econom&iacute;a Mundial</p>
         </div> 
         <div class="status alert alert-success" style="display: none"></div>
         <form id="registroForm" name="registroForm" class="contact-form" ng-submit="registro()" novalidate="novalidate">
@@ -18,7 +18,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3 wow fadeInDown">
-                    <div class="alert alert-info text-center" role="alert" ng-show="patrocinador"><strong>Patrocinador:</strong> {{patrocinador.nombres | uppercase}} {{patrocinador.apellidos | uppercase}}</div>
+                    <div class="alert alert-info text-center" role="alert" ng-show="patrocinador"><strong>Patrocinador:</strong> {{patrocinador.nombres| uppercase}} {{patrocinador.apellidos| uppercase}}</div>
                 </div>
             </div>
             <div class="row contact-wrap"> 
@@ -27,7 +27,7 @@
                         <label>Nombre de Usuario *</label>
                         <input type="text" name="w_usuario" ng-model="reg.w_usuario" class="form-control" required="required" placeholder="(Nombre de usuario)" tabindex="3" ng-pattern="usernamePattern" ng-trim="false">
                         <p ng-show="registroForm.w_usuario.$error.required && registroForm.w_usuario.$touched" class="help-block">Nombre de usuario es un campo obligatorio.</p>
-                        <p ng-show="registroForm.w_usuario.$error.pattern && registroForm.w_usuario.$touched" class="help-block">Nombre de usuario debe contener letras minusculas. Por lo menos 6.</p>
+                        <p ng-show="registroForm.w_usuario.$error.pattern && registroForm.w_usuario.$touched" class="help-block">Nombre de usuario debe contener letras minusculas o n&uacute;meros. Por lo menos 6.</p>
                     </div>
                     <div class="form-group" ng-class="{ 'has-error' : registroForm.w_email.$invalid && registroForm.w_email.$touched }">
                         <label>Email *</label>
@@ -118,14 +118,19 @@
                 </div>
             </div><!--/.row-->
             <div class="row">
-                <div class="col-sm-6 wow fadeInDown">
-                    <div class="alert alert-{{msgClass}} text-center" role="alert" ng-show="msg">{{msg | uppercase}}</div>
+                <div class="col-sm-7 wow fadeInDown">
+                    <div class="alert alert-{{msgClass}} text-center" role="alert" ng-show="msg">{{msg| uppercase}}</div>
                 </div>
-                <div class="col-sm-4 wow fadeInDown">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" ng-model="w_bases" required="required"><strong>Acepto las bases y condiciones</strong>
-                        </label>
+                <div class="col-sm-3 wow fadeInDown">
+                    <div class="form-group">
+                        <a class="btn btn-info view-pdf" href="bases-condiciones.pdf">Ver las bases y condiciones</a>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="w_bases" required="required"><strong>Acepto las bases y condiciones</strong>
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-2 wow fadeInDown">
