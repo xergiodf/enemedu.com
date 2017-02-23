@@ -129,6 +129,14 @@ body section.admin .admin-wrap {
     padding-top: 30px;
 }
 
+#inicio {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: url(../images/enem/suscripcion.jpg) fixed no-repeat center center;
+    background-size: cover;
+}
+
 .center {
     text-align: center;
     padding-bottom: 55px;
@@ -2414,7 +2422,7 @@ ul.sidebar-gallery {
 }
 
 .post_reply_comments h4{
-    color:#c4c4c5;
+    color: #808080;
     font-weight:400;
 }
 
@@ -2836,27 +2844,27 @@ textarea.form-control::-webkit-input-placeholder {
  * Network
  */
 .node circle {
-   fill: #fff;
-   stroke: steelblue;
-   stroke-width: 3px;
- }
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 3px;
+}
 
- .node text { font: 12px sans-serif; }
+.node text { font: 12px sans-serif; }
 
- .link {
-   fill: none;
-   stroke: #ccc;
-   stroke-width: 2px;
- }
- 
- /**
- * modal iframe
- */
+.link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 2px;
+}
+
+/**
+* modal iframe
+*/
 .iframe-container {    
     padding-bottom: 60%;
     padding-top: 30px; height: 0; overflow: hidden;
 }
- 
+
 .iframe-container iframe,
 .iframe-container object,
 .iframe-container embed{

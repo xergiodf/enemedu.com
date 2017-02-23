@@ -75,7 +75,7 @@
                                             <li><a href="admin.php#/pagos">Formas de Pago</a></li>
                                             <li><a href="admin.php#/network">Network</a></li>
                                             <li><a href="admin.php#/password">Cambio de Contrase&ntilde;a</a></li>
-                                            <li ng-show="loggedUser.admin"><a href="admin.php#/usuarios">Activar Usuarios Nuevos</a></li>
+                                            <li ng-show="loggedUser.admin"><a href="admin.php#/usuarios">Administrar Usuarios</a></li>
                                             <li><a href="business.php?login">Cerrar Sesi&oacute;n</a></li>
                                         </ul>
                                     </li>

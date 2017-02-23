@@ -40,12 +40,13 @@ jQuery(function ($) {
         return false;
     });
 
-    if (window.location.pathname === '/business.php' &&
-            window.location.search.startsWith('?login&tokenCambioPass=')) {
+    if (window.location.pathname === '/login' &&
+            window.location.search.startsWith('?param&tokenCambioPass=')) {
         $('#cambioPass').modal('toggle');
     }
 });
 var backend = "http://45.79.159.123:8080/enem-services/servicios";
+//var backend = "http://localhost:8081/enem-services/servicios";
 angular.module('enem', [
     'ui.router',
     'ngCookies'
@@ -55,7 +56,7 @@ angular.module('enem', [
                 $stateProvider
                         .state("usuarios", {
                             url: "/usuarios",
-                            templateUrl: "partials/adm-usuarios.html",
+                            templateUrl: "adm-usuarios",
                             controller: "usuariosCtrl",
                             data: {
                                 authRequired: true,
@@ -64,7 +65,7 @@ angular.module('enem', [
                         })
                         .state("inicio", {
                             url: "/inicio",
-                            templateUrl: "partials/adm-inicio.html",
+                            templateUrl: "adm-inicio",
                             controller: "inicioCtrl",
                             data: {
                                 authRequired: true
@@ -72,7 +73,7 @@ angular.module('enem', [
                         })
                         .state("password", {
                             url: "/password",
-                            templateUrl: "partials/adm-password.html",
+                            templateUrl: "adm-password",
                             controller: "passwordCtrl",
                             data: {
                                 authRequired: true
@@ -80,7 +81,7 @@ angular.module('enem', [
                         })
                         .state("network", {
                             url: "/network",
-                            templateUrl: "partials/adm-network.html",
+                            templateUrl: "adm-network",
                             controller: "networkCtrl",
                             data: {
                                 authRequired: true
@@ -88,7 +89,7 @@ angular.module('enem', [
                         })
                         .state("pagos", {
                             url: "/pagos",
-                            templateUrl: "partials/adm-pagos.html",
+                            templateUrl: "adm-pagos",
                             controller: "pagosCtrl",
                             data: {
                                 authRequired: true
@@ -110,7 +111,7 @@ angular.module('enem', [
                     }
                 }, function () {
                     if (!AuthService.isAuthenticated()) {
-                        return window.location.href = "business.php?login";
+                        return window.location.href = "login";
                     }
                 });
 
@@ -382,6 +383,42 @@ angular.module('enem', [
                                     );
                         };
 
+                        service.eliminarUsuario = function (username, callback) {
+                            $http.get(backend + '/usuariosrest/eliminarUsuario/' + username)
+                                    .then(
+                                            function success(response) {
+                                                callback(response);
+                                            },
+                                            function error(response) {
+                                                callback(response);
+                                            }
+                                    );
+                        };
+
+                        service.editarUsuario = function (upd, callback) {
+                            $http.post(backend + '/usuariosrest/editar/' + upd.idUsuario, upd)
+                                    .then(
+                                            function success(response) {
+                                                callback(response);
+                                            },
+                                            function error(response) {
+                                                callback(response);
+                                            }
+                                    );
+                        };
+
+                        service.getUsuario = function (userId, callback) {
+                            $http.get(backend + '/usuariosrest/getusuario/' + userId)
+                                    .then(
+                                            function success(response) {
+                                                callback(response);
+                                            },
+                                            function error(response) {
+                                                callback(response);
+                                            }
+                                    );
+                        };
+
                         return service;
                     }])
         .controller('inicioCtrl', ['$scope',
@@ -502,7 +539,7 @@ angular.module('enem', [
                             AuthService.authenticate($scope.w_username, $scope.w_password, function (response) {
                                 if (response.data.codigo === 200) {
                                     AuthService.setCredentials(response);
-                                    window.location.href = "admin.php#/inicio";
+                                    window.location.href = "backoffice#/inicio";
                                 } else {
                                     $scope.error = response.data.mensaje;
                                     $scope.dataLoading = false;
@@ -572,25 +609,32 @@ angular.module('enem', [
                                         alert(response.data.mensaje);
                                     }
                                 }
-                            })
+                            });
                         };
                     }]
                 )
         .controller('usuariosCtrl',
-                ['$scope', '$rootScope', '$http', 'UsuarioService',
-                    function ($scope, $rootScope, $http, UsuarioService) {
+                ['$scope', '$rootScope', '$http', 'UsuarioService', 'AuthService',
+                    function ($scope, $rootScope, $http, UsuarioService, AuthService) {
 
+                        $scope.dataLoading = true;
                         UsuarioService.listaUsuarios(function (response) {
+                            $scope.dataLoading = false;
                             $scope.usuariosList = response;
                         });
 
-                        $scope.changeUser = function (userId) {
+                        $scope.ciudadesList = {};
+                        AuthService.listCiudades(function (response) {
+                            $scope.ciudadesList = response.data.data;
+                        });
+
+                        $scope.saveUser = function (userId) {
                             $scope.dataLoading = true;
                             UsuarioService.cambiarEstadoUsuario(userId, function (response) {
                                 $scope.dataLoading = false;
                                 if (response.status !== 200) {
                                     console.log(response);
-                                    $scope.error = "Ocurrió un error en la comunicaciónn con el servidor.";
+                                    $scope.error = "Ocurrió un error en la comunicación con el servidor.";
                                 } else {
                                     if (response.data.codigo !== 200) {
                                         $scope.msg = response.data.mensaje;
@@ -604,6 +648,78 @@ angular.module('enem', [
                                 UsuarioService.listaUsuarios(function (response) {
                                     $scope.usuariosList = response;
                                 });
+                            });
+                        };
+
+                        $scope.deleteUser = function (username) {
+                            if (window.confirm("¿Esta seguro que desea eliminar al usuario " + username + "? \nEsta acción no puede deshacerse.")) {
+                                $scope.dataLoading = true;
+                                UsuarioService.eliminarUsuario(username, function (response) {
+                                    $scope.dataLoading = false;
+                                    if (response.status !== 200) {
+                                        console.log(response);
+                                        $scope.error = "Ocurrió un error en la comunicación con el servidor.";
+                                    } else {
+                                        if (response.data.codigo !== 200) {
+                                            $scope.msg = response.data.mensaje;
+                                            $scope.msgClass = "danger";
+                                        } else {
+                                            $scope.msg = response.data.mensaje;
+                                            $scope.msgClass = "success";
+                                        }
+                                    }
+
+                                    UsuarioService.listaUsuarios(function (response) {
+                                        $scope.usuariosList = response;
+                                    });
+                                });
+                            }
+                        };
+
+                        $scope.upd = {};
+
+                        $scope.editUser = function () {
+                            $scope.dataLoading = true;
+                            UsuarioService.editarUsuario($scope.upd, function (response) {
+                                $scope.dataLoading = false;
+                                if (response.status !== 200) {
+                                    console.log(response);
+                                    $scope.msg = "Ocurrió un error en la comunicacion con el servidor.";
+                                    $scope.msgClass = "danger";
+                                } else {
+                                    if (response.data.codigo !== 200) {
+                                        $scope.msg = response.data.mensaje;
+                                        $scope.msgClass = "danger";
+                                    } else {
+                                        $scope.msg = "Usuario actualizado correctamente";
+                                        $scope.msgClass = "success";
+                                        $scope.editUserForm.$setPristine();
+                                        $scope.editUserForm.$setUntouched();
+
+                                        UsuarioService.listaUsuarios(function (response) {
+                                            $scope.usuariosList = response;
+                                        });
+                                    }
+                                }
+                            });
+                        };
+
+                        $scope.getUser = function (userId) {
+                            $scope.dataLoading = true;
+                            UsuarioService.getUsuario(userId, function (response) {
+                                $scope.dataLoading = false;
+                                if (response.status !== 200) {
+                                    console.log(response);
+                                    $scope.msg = "Ocurrió un error en la comunicacion con el servidor.";
+                                    $scope.msgClass = "danger";
+                                } else {
+                                    if (response.data.codigo !== 200) {
+                                        $scope.msg = response.data.mensaje;
+                                        $scope.msgClass = "danger";
+                                    } else {
+                                        $scope.upd = response.data.data;
+                                    }
+                                }
                             });
                         };
                     }]
@@ -620,7 +736,7 @@ angular.module('enem', [
                                 $scope.dataLoading = false;
                                 if (response.status !== 200) {
                                     console.log(response);
-                                    $scope.error = "Ocurrió un error en la comunicaciónn con el servidor.";
+                                    $scope.error = "Ocurrió un error en la comunicación con el servidor.";
                                 } else {
                                     if (response.data.codigo !== 200) {
                                         $scope.msg = response.data.mensaje;
@@ -647,7 +763,7 @@ angular.module('enem', [
 
                                 // ************** Generate the tree diagram  *****************
                                 var margin = {top: 20, right: 150, bottom: 20, left: 150, node: 150};
-                                var width = countChildren(treeData[0]) * (margin.node / 1.7);
+                                var width = countChildren(treeData[0]) * (margin.node / 1.2);
                                 var height = countChildren(treeData[0]) * (margin.node / 4);
                                 var viewbox = "0,0," + (width + margin.right + margin.left) + "," + (height + margin.top + margin.bottom);
 

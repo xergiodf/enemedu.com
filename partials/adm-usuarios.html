@@ -5,30 +5,152 @@
 <div class="blog">
     <div class="row admin-wrap">
         <div class="col-md-8">
-            <div class="alert alert-{{msgClass}} text-center" role="alert" ng-show="msg">{{msg | uppercase}}</div>
+            <div class="alert alert-{{msgClass}} text-center" role="alert" ng-show="msg">{{msg| uppercase}}</div>
             <div class="widget search">
                 <form role="form">
                     <input type="text" class="form-control search_box" autocomplete="off" placeholder="Buscar usuarios" ng-model="searchText">
                 </form>
             </div><!--/.search-->
-            <div class="media comment_section" ng-repeat="usuario in usuariosList | filter:searchText">
-                <div class="pull-left post_comments">
-                    <img src="resources/images/blog/avatar3.png" class="img-circle" alt="" />
+            <div class="media comment_section" ng-repeat="usuario in usuariosList| filter:searchText">
+                <div class="form-box">
+                    <div class="form-top">
+                        <div class="form-top-left">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <h2>{{ usuario.nombreCompleto}}</h2>
+                                </div>
+                                <div class="col-md-7">
+                                    <p><strong>Sponsor: </strong> {{ usuario.sponsor}}</p>
+                                    <p><strong>Fecha de registro:</strong> {{ usuario.fechaRegistro}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-top-right">
+                            <i class="fa fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="form-bottom">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Nombre de usuario:</strong> {{ usuario.usuario}}</p>
+                                <p><strong>Nro. Documento:</strong> {{ usuario.nroDocumento}}</p>
+                                <p><strong>Email:</strong> {{ usuario.mail}}</p>
+                                <p><strong>Genero:</strong> {{ usuario.genero}}</p>
+                                <p><strong>Fecha de Nacimiento:</strong> {{ usuario.fechaNacimiento}}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>RUC:</strong> {{ usuario.ruc}}</p>
+                                <p><strong>Telefono:</strong> {{ usuario.telefono}}</p>
+                                <p><strong>Celular:</strong> {{ usuario.celular}}</p>
+                                <p><strong>Direccion:</strong> {{ usuario.lugarDireccion}}</p>
+                                <p><strong>Ciudad:</strong> {{ usuario.ciudad}}</p>
+                                <p ng-show="usuario.token"><strong>Link de activaci&oacute;n:</strong> {{ usuario.token}}</p>
+                            </div>
+                        </div>
+                        <button class="btn btn-danger" ng-click="deleteUser(usuario.usuario)"><i class="fa fa-trash-o fa-lg"></i> Eliminar usuario</button>
+                        <button class="btn btn-info" data-toggle="modal" data-target="#editForm" ng-click="getUser(usuario.idUsuario)"><i class="fa fa-user fa-lg"></i> Editar Usuario</button>
+                        <span ng-hide="usuario.token" ng-switch on="usuario.activo" ng-click="saveUser(usuario.idUsuario)">
+                            <button class="btn btn-danger" ng-switch-when="true"><i class="fa fa-times-circle-o fa-lg"></i> Inactivar</button>
+                            <button class="btn btn-success" ng-switch-when="false"><i class="fa fa-check-circle-o fa-lg"></i> Activar</button>
+                        </span>
+                    </div>
                 </div>
-                <div class="media-body post_reply_comments" >
-                    <h2>{{ usuario.nombreCompleto }}</h2>
-                    <h4><strong>{{ usuario.usuario }}</stron></h4>
-                    <h4>Fecha de registro: {{ usuario.fechaRegistro }}</h4>
-                    <span ng-switch on="usuario.activo" ng-click="changeUser(usuario.idUsuario)">
-                        <a ng-switch-when="true" class="inactivo">
-                            <span>Inactivar</span>
-                        </a>
-                        <a ng-switch-when="false" class="activo">
-                            <span>Activar</span>
-                        </a>
-                    </span>
+            </div>
+            <div class="modal fade" id="editForm" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form class="form-horizontal" name="editUserForm" id="editUserForm" ng-submit="editUser()">
+                            <input type="hidden" ng-model="upd.idUsuario" name="w_id"/>
+                            <div class="modal-header">
+                                <button class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Editar Usuario</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-offset-1 col-md-5">
+                                        <div class="form-group wow fadeInLeftBig">
+                                            <label class="control-label" for="w_nombres">Nombres *</label>  
+                                            <input id="w_nombres" ng-model="upd.nombres" name="w_nombres" type="text" class="form-control input-md" required="required"/>
+                                        </div>
+
+                                        <div class="form-group wow fadeInLeftBig">
+                                            <label class="control-label" for="w_nrodoc">Nro. Documento *</label>  
+                                            <input id="w_nrodoc" ng-model="upd.nroDocumento" name="w_nrodoc" type="text" placeholder="nro documento" class="form-control input-md" required="required"/>
+                                        </div>
+
+                                        <div class="form-group wow fadeInLeftBig">
+                                            <label class="control-label" for="w_fecnac">Fecha Nacimiento *</label>  
+                                            <input type="text" ng-model="upd.fechaNacimiento" name="w_fecnac" ng-pattern="datePattern" id="w_fecnac" class="form-control" placeholder="dd/mm/aaaa" required="required" data-date-format="dd/mm/yyyy"/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label" for="w_celular">Celular</label>  
+                                            <input id="w_celular" ng-model="upd.celular" name="w_celular" type="text" placeholder="celular" class="form-control input-md" value="{{ usuario.celular}}">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label" for="w_ruc">RUC</label>  
+                                            <input id="w_ruc" ng-model="upd.ruc" name="w_ruc" type="text" placeholder="ruc" class="form-control input-md" value="{{ usuario.ruc}}">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group wow fadeIntBig">
+                                            <label class="control-label" for="w_apellidos">Apellidos *</label>  
+                                            <input id="w_apellidos" ng-model="upd.apellidos" name="w_apellidos" type="text" placeholder="apellidos" class="form-control input-md" required="required" value="{{ usuario.apellidos}}">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="control-label" for="w_genero">Genero *</label>
+                                            <select id="w_genero" name="w_genero" class="form-control" ng-model="upd.genero" required="required">
+                                                <option value="M">Masculino</option>
+                                                <option value="F">Femenino</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label" for="w_email">Email *</label>  
+                                            <input id="w_email" ng-model="upd.email" name="w_email" type="text" placeholder="email" class="form-control input-md" required="required" value="{{ usuario.mail}}">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label" for="w_telefono">Teléfono</label>  
+                                            <input id="w_telefono" ng-model="upd.telefono" name="w_telefono" type="text" placeholder="telefono" class="form-control input-md" value="{{ usuario.telefono}}">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label" for="w_ciudad">Ciudad</label>  
+                                            <select ng-model="upd.idCiudad" class="form-control" name="w_ciudad">
+                                                <option ng-repeat="ciudad in ciudadesList" value="{{ciudad.idCiudad}}">
+                                                    {{ciudad.nombre| uppercase}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-offset-1 col-md-10">
+                                            <div class="form-group">
+                                                <label class="control-label" for="w_direccion">Dirección *</label>  
+                                                <input id="w_direccion" ng-model="upd.direccion" name="w_direccion" type="text" placeholder="direccion" class="form-control input-md" required="required" value="{{ usuario.direccion}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-offset-1 col-md-10">
+                                            <div class="alert alert-{{msgClass}} text-center" role="alert" ng-show="msg">{{msg| uppercase}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" name="submit" class="btn btn-info"><i class="fa fa-save fa-lg"></i> Guardar</button>
+                                <button class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times fa-lg"></i>Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div> 
+            </div>
         </div>
     </div><!--/.row-->
 </div>
